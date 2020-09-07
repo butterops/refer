@@ -15,8 +15,14 @@
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
+      "matches": [
+        "https://*/*"
+      ],
       "js": ["myContentScript.bundle.js"]
     }
-  ]
+  ],
+  "permissions": [
+          "tabs",
+          "activeTab"
+        ]
 }
