@@ -11,14 +11,16 @@ import '../img/icon-34.png'
 console.log(chrome);
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     //alert('updated from background');
-    console.log('check');
+    console.log(changeInfo.url);
     console.log(tabId);
     //chrome.runtime.sendMessage({ from: 'background', message: 'Information from webpage.' });
-    chrome.tabs.sendMessage(
-      tabId, { from: 'background', message: 'Information from webpage.' }
-      // ,
-      // function(response) {
-      //     // console.log(response);
-      //   }
-    );
+    if(changeInfo.url && changeInfo.url.includes('watch')){
+      chrome.tabs.sendMessage(
+        tabId, { from: 'background', message: 'Information from webpage.', changeInfo: changeInfo }
+        // ,
+        // function(response) {
+        //     // console.log(response);
+        //   }
+      );
+    }
 });

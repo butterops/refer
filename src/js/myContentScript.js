@@ -1,11 +1,10 @@
 console.log("watching on youtube");
 // ytplayer = document.getElementById("movie_player");
 // ytplayer.getCurrentTime();
-console.log(chrome);
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-alert('message')
-console.log(request, 'test');
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
   if (request.from == 'background') {
-    console.log('The request has been received from the bg script.');
+    console.log(request.changeInfo);
+    console.log('one step away from an awsome plugin and once we carve it you will be able to take notes from this URL>>>>>> '+ request.changeInfo.url);
   }
 });
