@@ -4,6 +4,7 @@ console.log("watching on youtube");
 console.log(chrome);
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 alert('message')
+console.log(request, 'test');
   if (request.from == 'background') {
     console.log('The request has been received from the bg script.');
   }
