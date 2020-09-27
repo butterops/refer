@@ -1,113 +1,128 @@
-# Chrome Extension Webpack Boilerplate
+<h1 align="center">🚀 Refer - Web Clipper</h1>
+<p align="center">Cross browser web clipper. Takes video notes, screenshots and extract texts or images from supported web browsers. </p>
 
-A basic foundation boilerplate for rich Chrome Extensions using [Webpack](https://webpack.github.io/) to help you write modular and modern Javascript code, load CSS easily and [automatic reload the browser on code changes](https://webpack.github.io/docs/webpack-dev-server.html#automatic-refresh).
+<h3 align="center">🙋‍♂️ Made by <a href="https://www.butterops.dev">ButterOps.Dev</a></h3>
 
-## Developing a new extension
-_I'll assume that you already read the [Webpack docs](https://webpack.js.org) and the [Chrome Extension](https://developer.chrome.com/extensions/getstarted) docs._
+## Features
 
+- Cross Browser Support (Web-Extensions API)
+- Browser Tailored Manifest generation
+- Automatic build on code changes
+- Automatic extension reload on browser
+- Auto packs browser specific build files
+- ES6 modules support
+- SASS styling
 
-1. Check if your Node.js version is >= 6.
-2. Clone the repository.
-3. Install [yarn](https://yarnpkg.com/lang/en/docs/install/).
-4. Run `yarn`.
-5. Change the package's name and description on `package.json`.
-6. Change the name of your extension on `src/manifest.json`.
-7. Run `yarn run start`
-8. Load your extension on Chrome following:
-    1. Access `chrome://extensions/`
-    2. Check `Developer mode`
-    3. Click on `Load unpacked extension`
-    4. Select the `build` folder.
-8. Have fun.
+## Browser Support
 
-## Structure
-All your extension's development code must be placed in `src` folder, including the extension manifest.
+| [![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)](/) | [![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)](/) | [![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png)](/) | [![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png)](/) | [![Yandex](https://raw.github.com/alrra/browser-logos/master/src/yandex/yandex_48x48.png)](/) | [![Brave](https://raw.github.com/alrra/browser-logos/master/src/brave/brave_48x48.png)](/) | [![vivaldi](https://raw.github.com/alrra/browser-logos/master/src/vivaldi/vivaldi_48x48.png)](/) |
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 49 & later ✔ | 52 & later ✔ | 36 & later ✔ | 79 & later ✔ | Latest ✔ | Latest ✔ | Latest ✔
 
-The boilerplate is already prepared to have a popup, a options page and a background page. You can easily customize this.
+## 🚀 Quick Start
 
-Each page has its own [assets package defined](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate/blob/master/webpack.config.js#L16-L20). So, to code on popup you must start your code on `src/js/popup.js`, for example.
+Ensure you have
 
-You must use the [ES6 modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) to a better code organization. The boilerplate is already prepared to that and [here you have a little example](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate/blob/master/src/js/popup.js#L2-L4).
+- [Node.js](https://nodejs.org) 10 or later installed
+- [Yarn](https://yarnpkg.com) v1 or v2 installed
 
-## Webpack auto-reload and HRM
-To make your workflow much more efficient this boilerplate uses the [webpack server](https://webpack.github.io/docs/webpack-dev-server.html) to development (started with `yarn run server`) with auto reload feature that reloads the browser automatically every time that you save some file o your editor.
+Then run the following:
 
-You can run the dev mode on other port if you want. Just specify the env var `port` like this:
+- `yarn install` to install dependencies.
+- `yarn run dev:chrome` to start the development server for chrome extension
+- `yarn run dev:firefox` to start the development server for firefox addon
+- `yarn run dev:opera` to start the development server for opera extension
+- `yarn run build:chrome` to build chrome extension
+- `yarn run build:firefox` to build firefox addon
+- `yarn run build:opera` to build opera extension
+- `yarn run build` builds and packs extensions all at once to extension/ directory
 
-```
-$ PORT=6002 yarn run start
-```
+### Development
 
-## Content Scripts
+- `yarn install` to install dependencies.
+- To watch file changes in developement
 
-Although this boilerplate uses the webpack dev server, it's also prepared to write all your bundles files on the disk at every code change, so you can point, on your extension manifest, to your bundles that you want to use as [content scripts](https://developer.chrome.com/extensions/content_scripts), but you need to exclude these entry points from hot reloading [(why?)](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate/issues/4#issuecomment-261788690). To do so you need to expose which entry points are content scripts on the `webpack.config.js` using the `chromeExtensionBoilerplate -> notHotReload` config. Look the example below.
+  - Chrome
+    - `yarn run dev:chrome`
+  - Firefox
+    - `yarn run dev:firefox`
+  - Opera
+    - `yarn run dev:opera`
 
-Let's say that you want use the `myContentScript` entry point as content script, so on your `webpack.config.js` you will configure the entry point and exclude it from hot reloading, like this:
+- **Load extension in browser**
+
+- ### Chrome
+
+  - Go to the browser address bar and type `chrome://extensions`
+  - Check the `Developer Mode` button to enable it.
+  - Click on the `Load Unpacked Extension…` button.
+  - Select your extension’s extracted directory.
+
+- ### Firefox
+
+  - Load the Add-on via `about:debugging` as temporary Add-on.
+  - Choose the `manifest.json` file in the extracted directory
+
+- ### Opera
+
+  - Load the extension via `opera:extensions`
+  - Check the `Developer Mode` and load as unpacked from extension’s extracted directory.
+
+### Production
+
+- `yarn run build` builds the extension for all the browsers to `extension/BROWSER` directory respectively.
+
+Note: By default the `manifest.json` is set with version `0.0.0`. The webpack loader will update the version in the build with that of the `package.json` version. In order to release a new version, update version in `package.json` and run script.
+
+### Generating browser specific manifest.json
+
+Update `src/manifest.json` file with browser vendor prefixed manifest keys
 
 ```js
 {
-  …
-  entry: {
-    myContentScript: "./src/js/myContentScript.js"
-  },
-  chromeExtensionBoilerplate: {
-    notHotReload: ["myContentScript"]
-  }
-  …
+  "__chrome__name": "SuperChrome",
+  "__firefox__name": "SuperFox",
+  "__edge__name": "SuperEdge",
+  "__opera__name": "SuperOpera"
 }
 ```
 
-and on your `src/manifest.json`:
+if the vendor is `chrome` this compiles to:
 
-```json
+```js
 {
-  "content_scripts": [
-    {
-      "matches": ["https://www.google.com/*"],
-      "js": ["myContentScript.bundle.js"]
-    }
-  ]
+  "name": "SuperChrome",
 }
-
 ```
 
-## Packing
-After the development of your extension run the command
+---
+
+Add keys to multiple vendors by seperating them with | in the prefix
 
 ```
-$ NODE_ENV=production yarn run build
-```
-Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
-
-## Secrets
-If you are developing an extension that talks with some API you probably are using different keys for testing and production. Is a good practice you not commit your secret keys and expose to anyone that have access to the repository.
-
-To this task this boilerplate import the file `./secrets.<THE-NODE_ENV>.js` on your modules through the module named as `secrets`, so you can do things like this:
-
-_./secrets.development.js_
-
-```js
-export default { key: "123" };
+{
+  __chrome|opera__name: "SuperBlink"
+}
 ```
 
-_./src/popup.js_
+if the vendor is `chrome` or `opera`, this compiles to:
 
-```js
-import secrets from "secrets";
-ApiCall({ key: secrets.key });
 ```
-:point_right: The files with name `secrets.*.js` already are ignored on the repository.
+{
+  "name": "SuperBlink"
+}
+```
 
-## With React.js
-:bulb: If you want use [React.js](https://facebook.github.io/react/) with this boilerplate, check the **[react branch](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate/tree/react)**.
+See the original [README](https://github.com/abhijithvijayan/wext-manifest-loader) of `wext-manifest-loader` package for more details
 
+## Bugs
 
-## Contributing
+Please file an issue [here](https://github.com/butterops/refer/issues/new) for bugs, missing documentation, or unexpected behavior.
 
-1. **Please!! Do not create a pull request without an issue before discussing the problem.**
-2. On your PR make sure that you are following the current codebase style.
-3. Your PR must be single purpose. Resolve just one problem on your PR.
-4. Make sure to commit in the same style that we are committing until now on the project.
+### Linting Config
 
--------------
-Samuel Simões ~ [@samuelsimoes](https://twitter.com/samuelsimoes) ~ [Blog](http://blog.samuelsimoes.com/)
+- Shared Eslint & Prettier [Configuration](https://www.npmjs.com/package/@abhijithvijayan/eslint-config)
+
+## License
+
+MIT © [ButterOps.Dev](https://www.butterops.dev)
