@@ -1,3 +1,4 @@
+// The refer button in the video player 
 const addButton = function () {
   var b = document.createElement("button");
   b.setAttribute("onClick", "{alert('Captured !!');}");
