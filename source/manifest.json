@@ -71,7 +71,7 @@
       "https://*/*"
     ],
     "js": [
-      "js/contentScript.bundle.js"
+      "assets/jquery.js","js/contentScript.bundle.js"
     ]
   }]
 }
