@@ -1,4 +1,4 @@
-<h1 align="center">🚀 Refer - Web Clipper</h1>
+<h1 align="center">Refer - Web Clipper</h1>
 <p align="center">Cross browser web clipper. Takes video notes, screenshots and extract texts or images from supported web browsers. </p>
 
 <h3 align="center">🙋‍♂️ Made by <a href="https://www.butterops.dev">ButterOps.Dev</a></h3>
