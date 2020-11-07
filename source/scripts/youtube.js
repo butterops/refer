@@ -11,8 +11,10 @@ export const addButton = () => {
   $(document).on('click', '.ytp-refer-button', () => {
     const videoTitle = $('h1.title.ytd-video-primary-info-renderer').text();
     const videoUrl = '';
-    const videoCurrentTime = '';
+    const videoCurrentTime =  $('.ytp-time-current')[0].innerText;
     const videoScreenshot = '';
     console.log('Title: ', videoTitle)
+    console.log('CurrentTime: ', videoCurrentTime)
+    alert(videoTitle)
   });
 };
