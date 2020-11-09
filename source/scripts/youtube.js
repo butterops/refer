@@ -15,6 +15,5 @@ export const addButton = () => {
     const videoScreenshot = '';
     console.log('Title: ', videoTitle)
     console.log('CurrentTime: ', videoCurrentTime)
-    alert(videoTitle)
   });
 };
