@@ -10,10 +10,12 @@ export const addButton = () => {
   // On click of button fetch details from page
   $(document).on('click', '.ytp-refer-button', () => {
     const videoTitle = $('h1.title.ytd-video-primary-info-renderer').text();
-    const videoUrl = '';
+    const channelUrl = $('.ytd-channel-name yt-formatted-string a')[0]['href'];
     const videoCurrentTime =  $('.ytp-time-current')[0].innerText;
-    const videoScreenshot = '';
+
+
     console.log('Title: ', videoTitle)
     console.log('CurrentTime: ', videoCurrentTime)
+    console.log('url: ', channelUrl);
   });
 };
