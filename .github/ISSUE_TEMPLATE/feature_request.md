@@ -1,9 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+title: As a [USER] I would like to [DO THIS] so that [THIS HAPPENS]
+labels: help wanted, type:story
+assignees: measdot
 
 ---
 
