@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 import 'emoji-log';
 import browser from 'webextension-polyfill';
 
 browser.runtime.onInstalled.addListener(() => {
-  // eslint-disable-next-line no-console
   console.emoji('🦄', 'onInstalled....');
 });
 

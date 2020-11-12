@@ -1,4 +1,5 @@
-import {addButton} from './youtube.js'
+/* eslint-disable no-console */
+import {addButton} from './youtube.js';
 
-console.log('helloworld from content script');
-addButton()
+console.log('hello world from content script');
+addButton();

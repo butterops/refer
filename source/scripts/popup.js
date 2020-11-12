@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import 'emoji-log';
 import browser from 'webextension-polyfill';
 
@@ -18,13 +19,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     url,
   });
 
-  // eslint-disable-next-line no-console
   console.emoji('🦄', response);
 
   document.getElementById('github__button').addEventListener('click', () => {
-    return openWebPage(
-      'https://github.com/butterops/refer'
-    );
+    return openWebPage('https://github.com/butterops/refer');
   });
   document.getElementById('options__button').addEventListener('click', () => {
     return openWebPage('options.html');
