@@ -112,7 +112,7 @@ Please file an issue [here](https://github.com/butterops/refer/issues/new) for b
 
 MIT © [ButterOps.Dev](https://www.butterops.dev)
 
-## Boilerplate
+## Credits
 
 https://github.com/abhijithvijayan/web-extension-starter
 
