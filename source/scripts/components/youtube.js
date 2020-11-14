@@ -1,4 +1,12 @@
 /* eslint-disable no-undef */
+
+import Reference from './common/reference.js'
+
+class YoutubeClip {
+  constructor() {
+
+  }
+}
 export const addButton = () => {
   // Place a refer button in video player
   $('.ytp-right-controls').prepend(`
@@ -13,6 +21,10 @@ export const addButton = () => {
     const videoUrl = '';
     const videoCurrentTime = '';
     const videoScreenshot = '';
-    console.log('Title: ', videoTitle)
+
+    new Reference (
+      new YoutubeClip(videoTitle, videoUrl, videoCurrentTime, videoScreenshot),
+      'https://youtube.com/watch?v=hjgfd123456jh&s=112'
+    ).save()
   });
 };
