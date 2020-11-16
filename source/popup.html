@@ -6,20 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Popup</title>
   <link rel="stylesheet" href="css/popup.css" />
+  <script src="assets/jquery.js"></script>
 </head>
 
 <body>
-
   <section id="popup">
-    <h2>Refer - Web Clipper</h2>
-    <button id="options__button">Options Page</button>
+    <h2>Refer- Web Clipper</h2>
+    <img id="screenshot" src="" />
+    <div id="all-fields"></div>
+    <div id="last-capture"></div>
     <div class="links__holder">
       <ul>
         <li>
-          <button type="button" id="github__button">
-            GitHub
+          <button type="button" id="options__button">
+            Configure
           </button>
         </li>
+        <li>
+          <button type="button" id="wiki__button">
+            Read The  Docs
+          </button>
+        </li>
+        <li>
+          <button type="button" id="copy__json">
+            Copy JSON
+          </button>
+        </li>
+        
       </ul>
     </div>
   </section>
