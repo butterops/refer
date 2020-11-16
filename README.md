@@ -1,10 +1,7 @@
-<h1 align="center">🚀 Refer - Web Clipper</h1>
+<h1 align="center">Refer - Web Clipper</h1>
 <p align="center">Cross browser web clipper. Takes video notes, screenshots and extract texts or images from supported web browsers. </p>
 
-<h3 align="center">🙋‍♂️ Made by <a href="https://www.butterops.dev">ButterOps.Dev</a></h3>
-
-
-## 🚀 Quick Start
+## Quick Start
 
 Ensure you have
 
@@ -112,7 +109,7 @@ Please file an issue [here](https://github.com/butterops/refer/issues/new) for b
 
 MIT © [ButterOps.Dev](https://www.butterops.dev)
 
-## Boilerplate
+## Credits
 
 https://github.com/abhijithvijayan/web-extension-starter
 
