@@ -1,6 +1,5 @@
 import 'emoji-log';
 import browser from 'webextension-polyfill';
-
 import '../styles/popup.scss';
 
 function openWebPage(url) {
@@ -14,7 +13,25 @@ var read = (name, deflt) => browser.storage.local.get([name])
     }
     return result[name] || deflt;
   });
+var flattenObject = function (ob) {
+  var toReturn = {};
 
+  for (var i in ob) {
+    if (!ob.hasOwnProperty(i)) continue;
+
+    if ((typeof ob[i]) == 'object') {
+      var flatObject = flattenObject(ob[i]);
+      for (var x in flatObject) {
+        if (!flatObject.hasOwnProperty(x)) continue;
+
+        toReturn[i + '.' + x] = flatObject[x];
+      }
+    } else {
+      toReturn[i] = ob[i];
+    }
+  }
+  return toReturn;
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -25,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       // console.log(JSON.stringify(result))
 
       //screenshot
-      $('#screenshot').attr('src', result.info[3].value)
+      // $('#screenshot').attr('src', result.info[3].value)
 
       //all fields
       var tbl = document.createElement('table');
@@ -38,66 +55,44 @@ document.addEventListener('DOMContentLoaded', async () => {
       tbl.appendChild(thead);
       thead.appendChild(document.createElement("th")).appendChild(document.createTextNode("Captured Items"));
       thead.appendChild(document.createElement("th")).appendChild(document.createTextNode("Values"));
-      var keyPrefix = ''
-      var lastKeyPrefix = ''
 
-      function process(key, value) {
-        // if (typeof value === 'object' && value !== null) {
-        //   keyPrefix = keyPrefix.replace(lastKeyPrefix,'')
-        //   keyPrefix += `${key}/`;
-        //   lastKeyPrefix = `${key}/`
-        // } else {
-          var tbl_row = tbl_body.insertRow();
-          tbl_row.className = odd_even ? "odd" : "even";
+      var flatResult = flattenObject(result);
+      for (var key in flatResult) {
+        var tbl_row = tbl_body.insertRow();
+        tbl_row.className = odd_even ? "odd" : "even";
 
-          var cell1 = tbl_row.insertCell();
-          cell1.appendChild(document.createTextNode(keyPrefix + key.toString()));
+        var cell1 = tbl_row.insertCell();
+        cell1.appendChild(document.createTextNode(key.toString()));
 
-          var cell2 = tbl_row.insertCell();
-          cell2.appendChild(document.createTextNode(value.toString()));
-          odd_even = !odd_even;
-        // }
-      }
-
-      function traverse(o, func) {
-        for (var i in o) {
-          func.apply(this, [i, o[i]]);
-          if (o[i] !== null && typeof (o[i]) == "object") {
-            //going one step down in the object tree!!
-            traverse(o[i], func);
+        var cell2 = tbl_row.insertCell();
+        if (flatResult[key].toString().startsWith("data:image")) {
+          function img_create(src, alt, title) {
+            var img = document.createElement('img');
+            img.src = src;
+            if (alt != null) img.alt = alt;
+            if (title != null) img.title = title;
+            return img;
           }
+          cell2.appendChild(img_create(flatResult[key]));
+        } else {
+          cell2.appendChild(document.createTextNode(flatResult[key].toString()));
         }
+        odd_even = !odd_even;
       }
+      $("#all-fields").html(tbl);
 
-      //that's all... no magic, no bloated framework
-      traverse(result, process);
-
-      $("#all-fields").html(tbl);   //DOM table doesn't have .appendChild
-
-    })
-    .catch(console.error)
-
-
-
-  // const tabs = await browser.tabs.query({
-  //   active: true,
-  //   lastFocusedWindow: true,
-  // });
-
-  // const url = tabs.length && tabs[0].url;
-
-  // const response = await browser.runtime.sendMessage({
-  //   msg: 'hello',
-  //   url,
-  // });
-
-  // console.emoji('🦄', response);
-
-  document.getElementById('copy__json').addEventListener('click', () => {
-    // return openWebPage(
-    //   'https://github.com/butterops/refer'
-    // );
-  });
+      document.getElementById('download__json').addEventListener('click', () => {
+        var _myArray = JSON.stringify(flatResult, null, 4); //indentation in json format, human readable
+        var vLink = document.createElement('a'),
+          vBlob = new Blob([_myArray], { type: "octet/stream" }),
+          vName = `reference-web-clip@${flatResult["meta.time"]}.json`,
+          vUrl = window.URL.createObjectURL(vBlob);
+    
+        vLink.setAttribute('href', vUrl);
+        vLink.setAttribute('download', vName);
+        vLink.click();
+      });
+    }).catch(console.error)
 
   document.getElementById('wiki__button').addEventListener('click', () => {
     return openWebPage('https://github.com/butterops/refer/wiki/');
