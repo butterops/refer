@@ -1,3 +1,4 @@
+import Lynda from './websites/lynda.com'
 import Youtube from './websites/youtube.com'
 
 class PageContext {
@@ -6,6 +7,10 @@ class PageContext {
         if (this.location.href.startsWith('https://www.youtube.com/watch?v=')) {
             this.category = 'videos:youtube'
             new Youtube(this)
+        }
+        else if(this.location.href.startsWith('https://www.linkedin.com/learning')) {
+            this.category = 'videos:lynda'
+            new Lynda(this)
         }
     }
 }
