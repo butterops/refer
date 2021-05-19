@@ -71,7 +71,7 @@
       "https://*/*"
     ],
     "js": [
-      "assets/jquery.js","js/contentScript.bundle.js"
+      "assets/jquery.js", "assets/mnotes.js", "assets/vue.js", "js/contentScript.bundle.js"
     ]
   }]
 }

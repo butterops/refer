@@ -1,103 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Options</title>
-  <link rel="stylesheet" href="css/options.css" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.0" />
+    <script src="assets/vue.js"></script>
+    <title>Reference Clips</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+        body {
+            font-family: "Montserrat";
+            /* font: 14px/1.6'Avenir', Helvetica, Arial, sans-serif; */
+        }
+        i {
+            font-size: 12px;
+            clear: both;
+            font-style: normal;
+            display: block;
+        }
+        h2 {
+            margin: 10px
+        }
+        #app {
+            display: flex;
+            flex-flow: column wrap;
+            margin: 0 auto;
+            height: 600px;
+            justify-content: flex-start;
+            align-content: flex-start;
+        }
+        #app > * {
+            border-radius: 2px;
+            transition: all ease 0.3s;
+        }
+        #app>div {
+            position: relative;
+            width: 200px;
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+        
+        textarea {
+            display: block;
+            max-width: 200px;
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+        textarea:focus {
+            border-color: black;
+        }
+        button {
+            padding: 0;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            -webkit-appearance: none;
+        }
+        .button {
+            display: block;
+            box-sizing: content-box;
+            width: 200px;
+            padding: 8px;
+            margin: 0 10px 20px 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            clear: both;
+        }
+        .button:hover {
+            background-color: black;
+            color: white;
+            border-color: black;
+        }
+        .top {
+            text-align: right;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            margin-bottom: 0.5em;
+        }
+        
+        .close {
+            text-align: right;
+            height: 10px;
+            width: 10px;
+            position: relative;
+            box-sizing: border-box;
+            line-height: 10px;
+            display: inline-block;
+        }
+        .close:before, .close:after {
+            transform: rotate(-45deg);
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -1px;
+            margin-left: -5px;
+            display: block;
+            height: 2px;
+            width: 10px;
+            background-color: black;
+            transition: all 0.25s ease-out;
+        }
+        .close:after {
+            transform: rotate(-135deg);
+        }
+        .close:hover:before, .close:hover:after {
+            transform: rotate(0deg);
+        }
+
+
+    </style>
 </head>
 
 <body>
-  <form>
-    <p>
-      <h1>Configure Refer - Web Clipper Settings</h1>
-      <br>
-      
-      <h2>Select Storage</h2>        
-      <form action="/action_page.php">
-        <input type="radio" id="local" name="gender" checked="checked" value="male">
-        <label for="local">Local Storage</label><br>
-        
-        <input type="radio" id="api" name="gender" disabled value="female">
-        <label for="api">Api Url: Coming soon</label><br>
-      </form>
-      <br>
-      <h2>Select Fields</h2>
-      <h3>YouTube</h3>
-      <form>
-        <h4>Backend</h4>
-        <input type="checkbox" id="1" name="1" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> backend.link</label><br>
+    <div id="app">
 
-        <input type="checkbox" id="2" name="2" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> backend.type</label><br>
-        <br>
-        <h4>Info</h4>
-        <input type="checkbox" id="3" name="3" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.0.name</label><br>
+        <h2>{{title}}</h2>
 
-        <input type="checkbox" id="4" name="4" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.0.selector</label><br>
+        <textarea autofocus placeholder="insert your note .." v-model="note.text"></textarea>
 
-        <input type="checkbox" id="5" name="5" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.0.type</label><br>
+        <button class="button" @click="addNote">Submit</button>
 
-        <input type="checkbox" id="6" name="6" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.0.value</label><br>
-        <br>
-
-        <input type="checkbox" id="3" name="3" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.1.name</label><br>
-
-        <input type="checkbox" id="4" name="4" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.1.selector</label><br>
-
-        <input type="checkbox" id="5" name="5" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.1.type</label><br>
-
-        <input type="checkbox" id="6" name="6" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.1.value</label><br>
-        <br>
-
-        <input type="checkbox" id="3" name="3" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.2.name</label><br>
-
-        <input type="checkbox" id="4" name="4" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.2.selector</label><br>
-
-        <input type="checkbox" id="5" name="5" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.2.type</label><br>
-
-        <input type="checkbox" id="6" name="6" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.2.value</label><br>
-        <br>
-
-        <input type="checkbox" id="3" name="3" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.3.name</label><br>
-
-        <input type="checkbox" id="4" name="4" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.3.selector</label><br>
-
-        <input type="checkbox" id="5" name="5" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.3.type</label><br>
-
-        <input type="checkbox" id="6" name="6" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> info.3.value</label><br>
-        <br>
-        <h4>Meta</h4>
-        <input type="checkbox" id="3" name="3" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> meta.category</label><br>
-
-        <input type="checkbox" id="4" name="4" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> meta.time</label><br>
-
-        <input type="checkbox" id="5" name="5" value="Bike" checked="checked" disabled >
-        <label for="vehicle1"> meta.user</label><br>
-      </form>
-    </p>
-    
-  </form>
+        <div v-for="(note, index) in notes">
+            <div class ="top">
+                <button class="close" @click="removeNote(index)"></button>
+                <i>{{note.date}}</i>
+            </div>
+            {{note.text}}
+        </div>
+    </div>
+    <script src="assets/mnotes.js"></script>
 </body>
 
 </html>
